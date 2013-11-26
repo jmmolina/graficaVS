@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  h1 Resultados del query
+  table(width="200",border="1")
+   caption Los gastos en tarjetas BBVA
+   tr
+     th Fecha
+     th Genero
+     th <18
+     th 19-25
+     th 26-35
+     th 36-45
+     th 46-55
+     th 56-65
+     th >=66
+   each val in data.stats
+     tr
+       th(rowspan=2,scope=row)= val.date
+         th Mujeres         
+         each cubo in val.cube
+           if cubo.hash.substr(0,1)=="F"
+               td= cubo.avg
+      tr
+        th Hombres       
+        each cubo in val.cube
+           if cubo.hash.substr(0,1)=="M"
+               td= cubo.avg
+    

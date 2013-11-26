@@ -1,0 +1,33 @@
+doctype 5
+html(lang="en")
+  head
+    script(type="text/javascript", src="https://www.google.com/jsapi")
+    script.
+        var losDatos=[
+          ['Year', 'Sales', 'Expenses'],
+          ['2004',  1000,      400],
+          ['2005',  1170,      460],
+          ['2006',  660,       1120],
+          ['2007',  1030,      540]
+          ];
+    script.
+        var jsondata=#{objeto};
+    script.
+        google.load("visualization", "1", {packages:["corechart"]});
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+        //var data = google.visualization.arrayToDataTable(losDatos);
+        var data = new google.visualization.DataTable(jsondata);
+        var options = {
+          title: 'Gastos del sector femenino',
+          width: 800,
+          height: 600,
+          vAxis: {title: 'Consumo por fecha'}
+        };
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+        }
+  body
+    h1 Promedio de gasto en España
+    //p= objeto
+    #chart_div
